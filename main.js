@@ -3,6 +3,7 @@
 song1 = "";
 song2 = "";
 scoreleft = 0;
+scoreright = 0;
 status = "";
 leftWristX = 0;
 leftWristY = 0;
@@ -57,6 +58,18 @@ function draw() {
         
     }
 
+    if(scoreright > 0.2) {
+
+        circle( rightWristX, rightWristY, 20);
+        song2.stop();
+
+        if(song1_status == false) {
+            song1.play();
+            document.getElementById("song1").innerHTML = "Playing High Hopes";
+        }
+        
+    }
+
 }
 
 
@@ -81,8 +94,11 @@ function gotPoses(results) {
         rightWristY = results[0].pose.rightWrist.y;
         console.log( "rightWristX = " + rightWristX + "rightWristY = " + rightWristY );
 
-        scoreleft = result[0].pose.keypoint[9].score;
+        scoreleft = results[0].pose.keypoint[9].score;
         console.log("scoreleft = " + scoreleft);
+
+        scoreright = results[0].pose.keypoint[10].score;
+        console.log(" scoreright = " + scoreright);
     }
 
 }
